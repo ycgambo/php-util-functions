@@ -99,13 +99,11 @@ if (!function_exists('ignore_keys')) {
         $rtn = [];
         if ($o) {
             foreach ($keys as $k) {
-                if (isset($array->$k)) continue;
-                $rtn[$k] = $array->$k;
+                unset($rtn->$k);
             }
         } else {
             foreach ($keys as $k) {
-                if (isset($array[$k])) continue;
-                $rtn[$k] = $array[$k];
+                unset($rtn[$k]);
             }
         }
         return $rtn;
