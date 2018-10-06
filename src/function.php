@@ -58,14 +58,14 @@ if (!function_exists('unset_keys')) {
 
 if (!function_exists('ignore_keys')) {
     /**
-     * Create an array by ignoring some keys in reference array and keeping the remains
+     * Create an new array|object by ignoring some keys in reference array|object and keeping the remains
      *
      * @param array|object $array the reference array or object
      * @param array $keys keys to ignore
      * @param bool $meets_all
      * *true* the reference array must contains all of those keys. If not, we'll return the reference array
      * *false* (default) ignore a key when it appears
-     * @return array
+     * @return array|object
      *
      * @example
      * <code>
@@ -96,12 +96,13 @@ if (!function_exists('ignore_keys')) {
             }
         }
 
-        $rtn = [];
         if ($o) {
+            $rtn = clone $array;
             foreach ($keys as $k) {
                 unset($rtn->$k);
             }
         } else {
+            $rtn = [];
             foreach ($keys as $k) {
                 unset($rtn[$k]);
             }
@@ -112,14 +113,14 @@ if (!function_exists('ignore_keys')) {
 
 if (!function_exists('only_keys')) {
     /**
-     * Create an array by only taking listed keys in the reference array
+     * Create an new array|object by only taking listed keys in the reference array|object
      *
      * @param array|object $array the reference array or object
      * @param array $keys keys to take
      * @param bool $meets_all
      * *true* the reference array must contains all of those keys. If not, we'll return an empty array
      * *false* (default) take a key when it appears
-     * @return array
+     * @return array|object
      *
      * @example
      * <code>
@@ -150,12 +151,13 @@ if (!function_exists('only_keys')) {
             }
         }
 
-        $rtn = [];
         if ($o) {
+            $rtn = new stdClass();
             foreach ($keys as $k) {
-                if (isset($array->$k)) $rtn[$k] = $array->$k;
+                if (isset($array->$k)) $rtn->$k = $array->$k;
             }
         } else {
+            $rtn = [];
             foreach ($keys as $k) {
                 if (isset($array[$k])) $rtn[$k] = $array[$k];
             }
